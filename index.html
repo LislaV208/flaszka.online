@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="Description" content="Nie pij do lustra, pij do kamerki!">
+		<meta name="Keywords" content="flaszka, vodka, alcohol, video, chat, online, social">
+		<meta name="Author" content="leonpietrzak, lislav">
+		<link rel="shortcut icon" href="http://flaszka.esy.es/flaszka_icon.ico">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+		<!-- Assumes global locations for socket.io.js and easyrtc.js -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/easyrtc/easyrtc.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+		<title>flaszka.online</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<nav id="navbar">
+				<div class="container-fluid">
+					<div id="nav-left" class="col-xs-5 text-left">
+							<a href="#" class="hide-md">Zaloguj się</a>
+							<div class="separator hide-md">|</div>
+				  		<a href="#" class="hide-md">Rejestracja</a>
+							<div id="aparat_icon" class="hidden-xs"><span class="glyphicon glyphicon-camera"></span></div>
+								<button id="btn_start_stop" class="btn btn-default btn-nav">Start (F2)</button>
+								<button id="btn_next" class="btn btn-default btn-nav" disabled>Następny (F3)</button>
+					</div>
+					<div id="logo" class="col-xs-2 text-center">
+				  		<a href="#"><img src="img/logo.png"></a>
+					</div>
+					<div id="nav-right" class="col-xs-5 text-right sm-logo">
+						<a href="#" class="hide-md">Regulamin</a>
+						<div class="separator hide-md">|</div>
+					  	<a href="#" class="hide-md">Pomoc</a>
+						<div class="separator hide-md">|</div>
+					  	<a href="#" class="hide-md">Kontakt</a>
+
+						<a href="#" class="hide-sm"><img src="img/f_pol.png" class="flag space"></a>
+						<a href="#" class="hide-sm"><img src="img/f_eng.png" class="flag"></a>
+						<a href="#" class="hide-sm"><img src="img/f_rus.png" class="flag"></a>
+
+						<label for="show-menu" class="show-menu"><span class="glyphicon glyphicon-menu-hamburger"></span></label>
+
+
+					</div>
+				</div>
+			</nav>
+			<input type="checkbox" id="show-menu" role="button">
+			<ul id="menu">
+				<li><a href="#">Zaloguj się</a></li>
+				<li>
+					<a href="#">Rejestracja</a>
+					<ul class="hidden">
+						<li><a href="#">Who We Are</a></li>
+						<li><a href="#">What We Do</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Regulamin</a>
+					<ul class="hidden">
+						<li><a href="#">Photography</a></li>
+						<li><a href="#">Web & User Interface Design</a></li>
+						<li><a href="#">Illustration</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Pomoc</a></li>
+				<li><a href="#">Kontakt</a></li>
+			</ul>
+				<div class="content">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="video-bar">
+								<span>Twoja kamerka</span>
+							</div>
+							<div class="video">
+								<video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="video-bar">
+								<span>Twój kompan</span>
+							</div>
+							<div class="video">
+								<video autoplay="autoplay" id="callerVideo"></video>
+							</div>
+						</div>
+					</div>
+					<div id="chatbox" class="chatbox">
+						<div class="chat-bar">
+							<span id="msgIcon" class="glyphicon glyphicon-comment"></span> <span>Wiadomość tekstowa:</span>
+						</div>
+						<div id="conversation" class="conversation">
+						</div>
+						<input id="sendMsg" class="sendMsg" type="text" placeholder="Połącz się, aby rozmawiać" disabled>
+						<!--<button id="send" class="btn btn-default">Wyślij</button>-->
+						<span id="send" class="glyphicon glyphicon-send btn-send" title="Wyślij"></span>
+					</div>
+					<div class="text-center">
+						<span id="onlineUsers"></span>
+					</div>
+				</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,413 @@
+
+/*=============================================================
+    flaszka.online
+	Admins: leonpietrzak, lislav
+    ========================================================  */
+
+
+/*---------------------Global stuff-------------------------------------------*/
+
+@font-face {
+  font-family: flaszka;
+  src: url("../fonts/flaszka_font_m.otf") format("opentype");
+}
+
+.container-fluid {
+  padding: 0px !important;
+}
+
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
+body {
+  margin: 0;
+  background-color: #F2F2F2;
+  font-family: flaszka !important;
+}
+
+a {
+  color: white !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: #55fff3 !important;
+}
+
+a:focus {
+  text-decoration: none !important;
+}
+
+a:visited {
+  color: white;
+}
+
+.content {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.content .row .col-md-6:first-child {
+  padding: 0px 20px 0px 0px !important;
+}
+
+.content .row .col-md-6:last-child {
+  padding: 0px 0px 0px 20px !important;
+}
+
+/*---------------------------Navbar-------------------------------------------*/
+
+#navbar {
+  background-color: #232323;
+  height: 69px;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+#nav-left {
+  padding: 18px 0px 0px 25px;
+  display: block;
+}
+
+#nav-right {
+  padding: 22px 25px 0px 0px;
+  display: block;
+}
+
+.separator {
+  color: #4AD0C5;
+  font-weight: bold;
+  display: inline;
+  padding: 0px 5px;
+}
+
+#aparat_icon {
+  background-color: #BC1D33;
+  display: inline;
+  cursor: default;
+  border-radius: 100px;
+  padding: 5px 9px;
+  margin: 0px 10px 0px 10px;
+}
+
+.btn-nav {
+  /*width: 130px;*/
+  margin-left: 3px;
+}
+
+.btn-nav-small {
+  width: 50px;
+  margin-left: 10px;
+}
+
+.flag {
+  margin: 0px 2px;
+}
+
+.space {
+  margin-left: 15px;
+}
+
+/*---------------------------Videos-------------------------------------------*/
+
+.video-bar {
+  height: 40px;
+  width: 100%;
+  background-color: #000;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: 0px 0px 20px #AAA;
+  padding: 7px 15px;
+}
+
+.video-bar > span {
+  color: white;
+  font-size: 17px;
+}
+
+.video {
+  height:361px;
+  width:100%;
+  margin-bottom: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-bottom: 1px solid #969696;
+  box-shadow: 0px 5px 20px #AAA;
+}
+
+#selfVideo {
+  height: 100%;
+  width: 100%;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+#callerVideo {
+  height: 100%;
+  width: 100%;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+/*-------------------------Chatbox-------------------------------------------*/
+
+.chatbox {
+  width: 100%;
+  height: 315px;
+  border-bottom: 2px solid #969696;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #AAA;
+  margin: 5px 0px 5px 0px;
+}
+
+.chat-bar {
+  width: 100%;
+  height: 35px;
+  background-color: #232323;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 7px 15px;
+}
+
+.chat-bar > span {
+  color: white;
+  font-size: 15px;
+}
+
+#msgIcon {
+  color: white;
+  font-size: 20px;
+  margin-right: 10px;
+  display: block !important;
+  cursor: default;
+  float: left;
+}
+
+.conversation {
+  height: 250px;
+  overflow-y: scroll;
+  padding: 5px 20px;
+}
+
+p {
+  margin: 0 !important;
+}
+
+.statement {
+  font-style: italic;
+}
+
+.you {
+  font-weight: bold;
+  color: red;
+}
+
+.someone {
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}
+
+.sendMsg {
+  width: 95%;
+  height: 28px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 0;
+  padding-left: 20px;
+}
+
+textarea:focus, input:focus, .uneditable-input:focus {
+    outline: 0 none !important;
+}
+
+textarea, input, .uneditable-input {
+    border-top: 1px solid #232323;
+}
+
+.btn-send {
+  width: 4%;
+}
+
+.btn-send:hover {
+  cursor: pointer;
+}
+
+input[disabled] {
+  background-color: white;
+  cursor: not-allowed;
+}
+
+/*-------------------------------------------------------------------------*/
+
+/*Strip the ul of padding and list styling*/
+ul {
+	list-style-type:none;
+  float: right;
+  padding: 0;
+  width: 30%;
+	position: relative;
+	display:none;
+}
+
+/*Create a horizontal list with spacing*/
+li {
+	display:inline-block;
+	float: left;
+	margin-right: 1px;
+}
+
+/*Style for menu links*/
+li a {
+	display:block;
+	min-width:140px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	font-family: flaszka;
+	color: #fff;
+	background: #2f3036;
+	text-decoration: none;
+}
+
+/*Hover state for top level links*/
+li:hover a {
+	background: #444444;
+}
+
+/*Style for dropdown links*/
+li:hover ul a {
+	background: #f3f3f3;
+	color: #2f3036;
+	height: 40px;
+	line-height: 40px;
+}
+
+/*Hover state for dropdown links*/
+li:hover ul a:hover {
+	background: #19c589;
+	color: #fff;
+}
+
+/*Hide dropdown links until they are needed*/
+li ul {
+	display: none;
+}
+
+/*Make dropdown links vertical*/
+li ul li {
+	display: block;
+	float: none;
+}
+
+/*Prevent text wrapping*/
+li ul li a {
+	width: auto;
+	min-width: 100px;
+	padding: 0 20px;
+}
+
+/*Display the dropdown on hover*/
+ul li a:hover + .hidden, .hidden:hover {
+	display: block;
+}
+
+/*Style 'show menu' label button and hide it by default*/
+.show-menu {
+  font-size: 20px;
+	background: #333333;
+	padding: 5px 10px;
+	display: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/*Hide checkbox*/
+input[type=checkbox]{
+    display: none;
+}
+
+/*Show menu when invisible checkbox is checked*/
+input[type=checkbox]:checked ~ #menu{
+    display: block;
+}
+
+/*-------------------------Media stuff---------------------------------------*/
+
+@media screen and (max-width : 1250px){
+	.hide-md {
+    display: none;
+  }
+
+  .flag {
+    margin-bottom: 10px;
+  }
+
+  /*Make dropdown links appear inline*/
+	ul {
+		/*position: static;*/
+		display: none;
+	}
+	/*Create vertical spacing*/
+	li {
+		margin-bottom: 1px;
+	}
+	/*Make all menu links full width*/
+	ul li, li a {
+		width: 100%;
+	}
+	/*Display 'show menu' link*/
+	.show-menu {
+		display: inline;
+	}
+}
+
+@media screen and (max-width : 788px){
+	.hide-sm {
+    display: none;
+  }
+
+  .sm-logo {
+
+  }
+}
+
+@media screen and (max-height : 638px) {
+  .content {
+    max-width: 600px;
+    margin-bottom: 10px;
+  }
+
+  .video-bar {
+    height: 30px;
+    padding: 3px 15px;
+  }
+
+  .video-bar span {
+    font-size: 15px;
+  }
+
+  .video {
+    height:211px;
+    width:100%;
+  }
+
+  .chat-bar {
+    height: 30px;
+    padding: 4px 15px;
+  }
+
+  .chatbox {
+    height: 215px;
+  }
+
+  .conversation {
+    height: 150px;
+  }
+}
