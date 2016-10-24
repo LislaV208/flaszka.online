@@ -5,7 +5,7 @@
 	var myComradeID = "";
 	var isChannelActive = false;
 	var localBusyUsers = [];
-  var isUserReady = false;
+  var isUserActive = false;
 
   var text_btn_start = "Start (F8)";
   var text_btn_stop = "Stop (F8)";
@@ -37,16 +37,7 @@
     btn_send = document.getElementById("send");
     input_send = document.getElementById("sendMsg");
 
-    btn_start_stop.addEventListener("click", function() {
-      if (!isUserReady) {
-        isUserReady = true;
-        start();
-      }
-      else {
-        isUserReady = false;
-        stop();
-      }
-    });
+    btn_start_stop.addEventListener("click", handleStartStop);
     btn_next.addEventListener("click", findPartner);
     btn_send.addEventListener("click", sendMsg);
     input_send.addEventListener("keydown", function(event) {
@@ -113,16 +104,16 @@
   	}
   }
 
-  function toggleNavButtons() {
-    if (!isUserReady) {
-      btn_start_stop.innerHTML = text_btn_start;
-      btn_next.disabled = true;
-    }
-    else {
-      btn_start_stop.innerHTML = text_btn_stop;
-      btn_next.disabled = false;
-    }
-  }
+  // function toggleNavButtons() {
+  //   if (!isUserActive) {
+  //     btn_start_stop.innerHTML = text_btn_start;
+  //     btn_next.disabled = true;
+  //   }
+  //   else {
+  //     btn_start_stop.innerHTML = text_btn_stop;
+  //     btn_next.disabled = false;
+  //   }
+  // }
 
   function changeNav() {
       var w = window.innerWidth;
@@ -195,20 +186,30 @@
 		document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 
+  function handleStartStop() {
+    if (!isUserActive) {
+      isUserActive = true;
+      btn_start_stop.innerHTML = text_btn_stop;
+      btn_next.disabled = false;
+      start();
+    }
+    else {
+      isUserActive = false;
+      btn_start_stop.innerHTML = text_btn_start;
+      btn_next.disabled = true;
+      stop();
+    }
+  }
+
 	function handleInput(event) {
 		if (event.which == 13 || event.keyCode == 13) { // wciśnięto ENTER
 			sendMsg();
 		}
     else if (event.which == 119 || event.keyCode == 119) { // wciśnięto F8 (START/STOP)
-      if (myComradeID == "") {
-        findPartner();
-      }
-      else {
-        stopConversation();
-      }
+      handleStartStop();
 		}
     else if (event.which == 120 || event.keyCode == 120) { // wciśnięto F9 (NEXT)
-			if (btn_next.disabled == false) {
+			if (isUserActive) {
         findPartner();
       }
 		}
@@ -251,7 +252,7 @@
     sendMsgArea.disabled = false;
     sendMsgArea.setAttribute("placeholder", "Napisz wiadomość");
     addToConversation("Komunikat", "statement", statementContent);
-    toggleNavButtons();
+    // toggleNavButtons();
 
 		console.log("Channel is open");
 	}
@@ -269,7 +270,7 @@
 		localBusyUsers.remove(myComradeID);
 		myComradeID = "";
     addToConversation("Komunikat", "statement", statementContent);
-    toggleNavButtons();
+    // toggleNavButtons();
 
 		console.log("Channel is close");
 	}
