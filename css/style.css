@@ -95,8 +95,13 @@ a:visited {
 }
 
 .btn-nav {
-  /*width: 130px;*/
+  height:
+  background-color: #fff !important;
   margin-left: 3px;
+}
+
+.btn-start-stop {
+  width: 89px;
 }
 
 .btn-nav-small {
@@ -119,7 +124,7 @@ a:visited {
   width: 100%;
   margin-bottom: 20px;
   border-radius: 15px;
-  border-bottom: 1px solid #969696;
+  border-bottom: 2px solid #969696;
   box-shadow: 0px 0px 15px #AAA;
 }
 
@@ -179,7 +184,7 @@ video {
 }
 
 .conversation {
-  height: 255px;
+  height: 250px;
   overflow-y: scroll;
   padding: 5px 20px;
 }

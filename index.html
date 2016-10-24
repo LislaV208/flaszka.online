@@ -25,8 +25,8 @@
 							<div class="separator hide-md">|</div>
 				  		<a href="#" class="hide-md">Rejestracja</a>
 							<div id="aparat_icon" class="hidden-xs"><span class="glyphicon glyphicon-camera"></span></div>
-								<button id="btn_start_stop" class="btn btn-default btn-nav">Start (F2)</button>
-								<button id="btn_next" class="btn btn-default btn-nav" disabled>Następny (F3)</button>
+								<button id="btn_start_stop" class="btn btn-default btn-nav btn-start-stop">Start (F8)</button>
+								<button id="btn_next" class="btn btn-default btn-nav" disabled>Następny (F9)</button>
 					</div>
 					<div id="logo" class="col-xs-2 text-center">
 				  		<a href="#"><img src="img/logo.png"></a>
@@ -69,39 +69,39 @@
 				<li><a href="#">Pomoc</a></li>
 				<li><a href="#">Kontakt</a></li>
 			</ul>
-				<div class="content">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="video">
-								<div class="video-bar">
-									<span>Twoja kamerka</span>
-								</div>
-								<video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
+			<div class="content">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="video">
+							<div class="video-bar">
+								<span>Twoja kamerka</span>
 							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="video">
-								<div class="video-bar">
-									<span>Twój kompan</span>
-								</div>
-								<video autoplay="autoplay" id="callerVideo"></video>
-							</div>
+							<video autoplay="autoplay" class="easyrtcMirror" id="selfVideo" muted="muted" volume="0" ></video>
 						</div>
 					</div>
-					<div id="chatbox" class="chatbox">
-						<div class="chat-bar">
-							<span id="msgIcon" class="glyphicon glyphicon-comment"></span> <span>Wiadomość tekstowa:</span>
+					<div class="col-md-6">
+						<div class="video">
+							<div class="video-bar">
+								<span>Twój kompan</span>
+							</div>
+							<video autoplay="autoplay" id="callerVideo"></video>
 						</div>
-						<div id="conversation" class="conversation">
-						</div>
-						<input id="sendMsg" class="sendMsg" type="text" placeholder="Połącz się, aby rozmawiać" disabled>
-						<!--<button id="send" class="btn btn-default">Wyślij</button>-->
-						<span id="send" class="glyphicon glyphicon-send btn-send" title="Wyślij"></span>
-					</div>
-					<div class="text-center">
-						<span id="onlineUsers"></span>
 					</div>
 				</div>
+				<div id="chatbox" class="chatbox">
+					<div class="chat-bar">
+						<span id="msgIcon" class="glyphicon glyphicon-comment"></span> <span>Wiadomość tekstowa:</span>
+					</div>
+					<div id="conversation" class="conversation">
+					</div>
+					<input id="sendMsg" class="sendMsg" type="text" placeholder="Połącz się, aby rozmawiać" disabled>
+					<!--<button id="send" class="btn btn-default">Wyślij</button>-->
+					<span id="send" class="glyphicon glyphicon-send btn-send" title="Wyślij"></span>
+				</div>
+				<div class="text-center">
+					<span id="onlineUsers"></span>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

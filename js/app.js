@@ -5,6 +5,11 @@
 	var myComradeID = "";
 	var isChannelActive = false;
 	var localBusyUsers = [];
+  var isUserReady = false;
+
+  var text_btn_start = "Start (F8)";
+  var text_btn_stop = "Stop (F8)";
+  var text_btn_next = "Następny (F9)"
 
   var btn_start_stop;
   var btn_next;
@@ -19,29 +24,48 @@
 	}
 
   document.addEventListener("DOMContentLoaded", function() {
+    init();
+
+    document.addEventListener("keydown", function(event) {
+      handleInput(event);
+    });
     window.addEventListener("resize", changeNav);
     window.addEventListener("onload", changeNav);
-    connect();
+
     btn_start_stop = document.getElementById("btn_start_stop");
+    btn_next = document.getElementById("btn_next");
     btn_send = document.getElementById("send");
     input_send = document.getElementById("sendMsg");
 
-    btn_start_stop.addEventListener("click", findPartner);
+    btn_start_stop.addEventListener("click", function() {
+      if (!isUserReady) {
+        isUserReady = true;
+        start();
+      }
+      else {
+        isUserReady = false;
+        stop();
+      }
+    });
+    btn_next.addEventListener("click", findPartner);
     btn_send.addEventListener("click", sendMsg);
     input_send.addEventListener("keydown", function(event) {
       handleInput(event);
     });
-
   });
 
-  function connect() {
+  function init() {
     easyrtc.setVideoDims(640,480);
     easyrtc.enableDataChannels(true);
     easyrtc.setRoomOccupantListener(updateUsersStats);
     easyrtc.setPeerListener(addToConversation);
     easyrtc.setDataChannelOpenListener(channelOpenListener);
     easyrtc.setDataChannelCloseListener(channelCloseListener);
-    easyrtc.easyApp("flaszka.online", "selfVideo", ["callerVideo"], loginSuccess, loginFailure);
+    easyrtc.easyApp("flaszka.online", "selfVideo", ["callerVideo"], initSuccess, failure);
+  }
+
+  function start() {
+    findPartner();
   }
 
   function performCall(otherEasyrtcid) {
@@ -51,12 +75,12 @@
       easyrtc.call(otherEasyrtcid, successCB, failureCB);
     }
 
-  function loginSuccess(easyrtcid) {
+  function initSuccess(easyrtcid) {
     	selfEasyrtcid = easyrtcid;
       addToConversation("Komunikat", "statement", "Witamy na flaszka.online! Kliknij START (F2), aby znaleźć kompana do picia. (ID: " + selfEasyrtcid + ")");
     }
 
-  function loginFailure(errorCode, message) {
+  function failure(errorCode, message) {
       easyrtc.showError(errorCode, message);
     }
 
@@ -83,10 +107,21 @@
   	}
   	else {
   		var myComradeIndex = Math.floor(Math.random() * (freeUsers.length-1));
-      //document.getElementById("conversation").innerHTML = "";
+      // document.getElementById("conversation").innerHTML = "";
   		performCall(freeUsers[myComradeIndex]);
   		myComradeID = freeUsers[myComradeIndex];
   	}
+  }
+
+  function toggleNavButtons() {
+    if (!isUserReady) {
+      btn_start_stop.innerHTML = text_btn_start;
+      btn_next.disabled = true;
+    }
+    else {
+      btn_start_stop.innerHTML = text_btn_stop;
+      btn_next.disabled = false;
+    }
   }
 
   function changeNav() {
@@ -115,9 +150,14 @@
         for (var i = 0; i < buttons.length; i++) {
           buttons[i].style.width = "";
         }
-        buttons[0].textContent = "Start (F2)";
-        buttons[0].className = "btn btn-default btn-nav";
-        buttons[1].textContent = "Następny (F3)";
+        if (myComradeID == "") {
+          buttons[0].textContent = text_btn_start;
+        }
+        else {
+          buttons[0].textContent = text_btn_stop;
+        }
+        buttons[0].className = "btn btn-default btn-nav btn-start-stop";
+        buttons[1].textContent = text_btn_next;
         buttons[1].className = "btn btn-default btn-nav";
 
         nav_left.className = "col-xs-5 text-left";
@@ -156,8 +196,21 @@
 	}
 
 	function handleInput(event) {
-		if (event.which == 13 || event.keyCode == 13) { // jeżeli wciśnięto ENTER
+		if (event.which == 13 || event.keyCode == 13) { // wciśnięto ENTER
 			sendMsg();
+		}
+    else if (event.which == 119 || event.keyCode == 119) { // wciśnięto F8 (START/STOP)
+      if (myComradeID == "") {
+        findPartner();
+      }
+      else {
+        stopConversation();
+      }
+		}
+    else if (event.which == 120 || event.keyCode == 120) { // wciśnięto F9 (NEXT)
+			if (btn_next.disabled == false) {
+        findPartner();
+      }
 		}
 	}
 
@@ -198,6 +251,7 @@
     sendMsgArea.disabled = false;
     sendMsgArea.setAttribute("placeholder", "Napisz wiadomość");
     addToConversation("Komunikat", "statement", statementContent);
+    toggleNavButtons();
 
 		console.log("Channel is open");
 	}
@@ -214,7 +268,8 @@
 		localBusyUsers.remove(easyrtc.myEasyrtcid);
 		localBusyUsers.remove(myComradeID);
 		myComradeID = "";
-    addToConversation("Komunikat", "statement", statementContent)
+    addToConversation("Komunikat", "statement", statementContent);
+    toggleNavButtons();
 
 		console.log("Channel is close");
 	}
@@ -245,3 +300,8 @@
 		 var onlineUsersText = document.getElementById('onlineUsers');
 		 onlineUsersText.innerHTML = "Pijący online: " + connectedUsers.length;
 	 }
+
+  function stop() {
+    easyrtc.disconnect();
+    easyrtc.cleanMediaStream(document.getElementById("selfVideo"));
+  }
