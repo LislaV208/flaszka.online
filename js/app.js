@@ -89,18 +89,19 @@
   	if (connectedUsers.length == 1) {
       addToConversation("Komunikat", "statement", "Nikt oprócz Ciebie w tym momencie nie pije :(");
   		console.log("There's no one online");
-  		return; // TODO: Komunikat o braku użytkowników online
+  		return false;
   	}
   	else if (freeUsers === undefined || freeUsers.length == 0) {
   		console.log("Everyone's busy");
       addToConversation("Komunikat", "statement", "Wszyscy już piją!");
-  		return;
+  		return false;
   	}
   	else {
   		var myComradeIndex = Math.floor(Math.random() * (freeUsers.length-1));
       // document.getElementById("conversation").innerHTML = "";
   		performCall(freeUsers[myComradeIndex]);
   		myComradeID = freeUsers[myComradeIndex];
+      return true;
   	}
   }
 
@@ -188,10 +189,11 @@
 
   function handleStartStop() {
     if (!isUserActive) {
-      isUserActive = true;
-      btn_start_stop.innerHTML = text_btn_stop;
-      btn_next.disabled = false;
-      start();
+      if (findPartner()) {
+        isUserActive = true;
+        btn_start_stop.innerHTML = text_btn_stop;
+        btn_next.disabled = false;
+      }
     }
     else {
       isUserActive = false;
@@ -294,13 +296,13 @@
   function updateUsersStats(roomName, data) {
 		connectedUsers = [];
 		connectedUsers.push(easyrtc.myEasyrtcid);
-		 for (var id in data) {
-			 connectedUsers.push(id);
-		 }
+		for (var id in data) {
+			connectedUsers.push(id);
+		}
 
-		 var onlineUsersText = document.getElementById('onlineUsers');
-		 onlineUsersText.innerHTML = "Pijący online: " + connectedUsers.length;
-	 }
+		var onlineUsersText = document.getElementById('onlineUsers');
+		onlineUsersText.innerHTML = "Pijący online: " + connectedUsers.length;
+	}
 
   function stop() {
     easyrtc.disconnect();
