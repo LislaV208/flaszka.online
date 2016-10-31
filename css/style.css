@@ -49,37 +49,19 @@ a:visited {
   margin: auto;
 }
 
-
-@media screen and (min-width : 768px){
-  .content  .col-md-6:first-child {
-    padding: 0px 20px 0px 0px
-  }
-
-  .content .col-md-6:last-child {
-    padding: 0px 0px 0px 20px
-  }
+.content .row .col-md-6:first-child {
+  padding: 0px 20px 0px 0px !important;
 }
-@media screen and (max-width : 768px){
-  .content .col-xs-7:first-child {
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
-    min-width: 300px;
-  }
 
-  .content .col-xs-7:last-child {
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
-    min-width: 300px;
-  }
+.content .row .col-md-6:last-child {
+  padding: 0px 0px 0px 20px !important;
 }
 
 /*---------------------------Navbar-------------------------------------------*/
 
 nav {
   background-color: #232323;
-  min-height: 60px;
+  height: 69px;
   color: white;
   font-size: 16px;
   width: 100%;
@@ -341,6 +323,7 @@ ul li a:hover + .hidden, .hidden:hover {
   margin-left: 20px;
   cursor: pointer;
 }
+
 /*Hide checkbox*/
 input[type=checkbox]{
     display: none;
@@ -349,12 +332,6 @@ input[type=checkbox]{
 /*Show menu when invisible checkbox is checked*/
 input[type=checkbox]:checked ~ #menu{
     display: block;
-}
-#menu{
-  z-index: 1000;
-  position: absolute;
-  right: 0;
-  top: 70px;
 }
 
 /*-------------------------Media stuff---------------------------------------*/
